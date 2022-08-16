@@ -25,6 +25,7 @@ async def handlmsg(event):
         if str(string1) == str(string):
             coin = ""
             msg = event.raw_text
+            image = event.message.media
             with open('database.txt') as f:
                     contents = f.read()
             res = msg.split()
@@ -63,7 +64,10 @@ async def handlmsg(event):
                                 if re.search(sh, msg):
                                     msg = msg.replace(sh, "")
 
-                            await client.send_message(int(share), msg)
+                            try:
+                                await client.send_file(int(share), image, caption=msg)
+                            except:
+                                await client.send_message(int(share), msg)
                             with open('database.txt', 'w') as f1:
                                 new_text = contents.replace(contents, coin)
                                 f1.write(new_text)
