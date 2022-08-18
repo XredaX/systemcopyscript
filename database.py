@@ -20,3 +20,26 @@ class user():
         data = collection.find(words)
         countwords = collection.count_documents(words)
         return data, countwords
+        
+    def addsession(collection, Owenr, Session):
+        collection = db[collection]
+        newsession = {"Owenr":Owenr, "Session":Session}
+        collection.insert_one(newsession)
+
+    def findpost(collection, Owenr, share):
+        collection = db[collection]
+        post = {"Owenr":Owenr, "share":share}
+        data = collection.find(post)
+        countposts = collection.count_documents(post)
+        return data, countposts
+
+    def addpost(collection, Owenr, share, post):
+        collection = db[collection]
+        newspost = {"Owenr":Owenr, "share":share, "post":post}
+        collection.insert_one(newspost)
+
+    def editpost(collection, Owenr, share, post):
+        collection = db[collection]
+        post1 = {"Owenr":Owenr, "share":share}
+        new = {"$set":{"post":post}}
+        collection.update_one(post1, new)
