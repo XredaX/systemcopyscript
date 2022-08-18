@@ -28,8 +28,6 @@ async def handlmsg(event):
             image = event.message.media
             share = ""
             chat_id = event.chat_id
-            with open('database.txt') as f:
-                    contents = f.read()
             res = msg.split()
             for r in res:
                 cleanString = re.sub('\W+','', r).upper()
@@ -43,50 +41,39 @@ async def handlmsg(event):
                     for t in rules:
                         if cleanString == t:
                             coin = cleanString
-            if coin != "":
-                if coin == contents:
-                    f.close()
-                    pass
-                else:
-                    datachannel = user.findsession(collection = "channels", Owenr=str(admin))
-                    targets = []
-                    share = ''
-                    for d in datachannel[0]:
-                        targets.append(str(d["target"]))
-                    if str(chat_id) in targets:
-                        msg = re.sub(r'^https?:\/\/t.me\/.*[\r\n]*', '', msg, flags=re.MULTILINE)
-                        datachannel = user.findsession(collection = "channels", Owenr=str(admin))
-                        for i in datachannel[0]:
-                            target = str(i["target"])
-                            if str(target) == str(chat_id):
-                                share = i["share"]
-                                datawords = user.findwords(collection = "words", Owenr=str(admin), target=str(chat_id))
-                                for d in datawords[0]:
-                                    sh = d["objetT"]
-                                    if re.search(sh, msg):
-                                        msg = msg.replace(sh, "")
-
-                                try:
-                                    await client.send_file(int(share), image, caption=msg)
-                                except:
-                                    await client.send_message(int(share), msg)
-                                with open('database.txt', 'w') as f1:
-                                    new_text = contents.replace(contents, coin)
-                                    f1.write(new_text)
-                                    f1.close()
-                                    f.close()
-                                break   
-                        
-            else:
+            msg = re.sub(r'^https?:\/\/t.me\/.*[\r\n]*', '', msg, flags=re.MULTILINE)
+            datawords = user.findwords(collection = "words", Owenr=str(admin), target=str(chat_id))
+            if datawords[1]>0:
+                for d in datawords[0]:
+                    sh = d["objetT"]
+                    if re.search(sh, msg):
+                        msg = msg.replace(sh, "")
+            targets = []
+            share = ''
+            datachannel = user.findsession(collection = "channels", Owenr=str(admin))
+            for d in datachannel[0]:
+                targets.append(str(d["target"]))
+            if str(chat_id) in targets:
                 datachannel = user.findsession(collection = "channels", Owenr=str(admin))
                 for i in datachannel[0]:
                     target = str(i["target"])
                     if str(target) == str(chat_id):
                         share = i["share"]
+                        break
+            datapost = user.findpost(collection = "posts", Owenr=str(admin), share=str(chat_id))
+            if datapost[1]>0:
+                if datapost[0][0]['post'] != msg:
+                    try:
+                        await client.send_file(int(share), image, caption=msg)
+                    except:
+                        await client.send_message(int(share), msg)
+                    user.editpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
+            else:
                 try:
                     await client.send_file(int(share), image, caption=msg)
                 except:
                     await client.send_message(int(share), msg)
+                user.addpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
         else:
             os.system("python copymsg.py")
      except:
