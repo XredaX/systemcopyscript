@@ -5,7 +5,10 @@ from configs import Config
 from database import user
 import os
 from ticker_rules import rules
+from telegram import *
 
+token = "5751463403:AAGnnZNt2wyBYu2Rc26ENaj2wt52rcaj8ns"
+bot = Bot(token=token)
 
 print("start")
 admin = Config.ADMIN_ID
@@ -61,18 +64,33 @@ async def handlmsg(event):
                         share = i["share"]
                         break
             datapost = user.findpost(collection = "posts", Owenr=str(admin), share=str(chat_id))
+            msg1 = ""
+            try:
+                for dialog in await client.get_dialogs():
+                    if dialog.is_channel and dialog.id == int(target):
+                        msg1 = dialog.name+"\n\n"+msg 
+            except:
+                pass
             if datapost[1]>0:
                 if datapost[0][0]['post'] != msg:
                     try:
                         await client.send_file(int(share), image, caption=msg)
                     except:
                         await client.send_message(int(share), msg)
+                    try:
+                        bot.send_message(-1001617820230, msg1)
+                    except:
+                        pass
                     user.editpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
             else:
                 try:
                     await client.send_file(int(share), image, caption=msg)
                 except:
                     await client.send_message(int(share), msg)
+                try:
+                    bot.send_message(-1001617820230, msg1)
+                except:
+                    pass
                 user.addpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
         else:
             os.system("python copymsg.py")
