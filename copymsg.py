@@ -64,13 +64,13 @@ async def handlmsg(event):
                         share = i["share"]
                         break
             datapost = user.findpost(collection = "posts", Owenr=str(admin), share=str(chat_id))
-            msg1 = ""
-            try:
-                for dialog in await client.get_dialogs():
-                    if dialog.is_channel and dialog.id == int(target):
-                        msg1 = dialog.name+"\n\n"+msg 
-            except:
-                pass
+            #msg1 = ""
+            #try:
+             #   for dialog in await client.get_dialogs():
+              #      if dialog.is_channel and dialog.id == int(target):
+               #         msg1 = dialog.name+"\n\n"+msg 
+            #except:
+             #   pass
             if datapost[1]>0:
                 if datapost[0][0]['post'] != msg:
                     try:
@@ -78,7 +78,7 @@ async def handlmsg(event):
                     except:
                         await client.send_message(int(share), msg)
                     try:
-                        bot.send_message(-1001617820230, msg1)
+                        bot.send_message(-1001617820230, msg)
                     except:
                         pass
                     user.editpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
@@ -88,7 +88,7 @@ async def handlmsg(event):
                 except:
                     await client.send_message(int(share), msg)
                 try:
-                    bot.send_message(-1001617820230, msg1)
+                    bot.send_message(-1001617820230, msg)
                 except:
                     pass
                 user.addpost(collection = "posts", Owenr=str(admin), share=str(chat_id), post=str(msg))
