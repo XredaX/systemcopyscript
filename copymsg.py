@@ -42,12 +42,16 @@ async def handlmsg(event):
                             if re.search(sh, msg):
                                 msg = msg.replace(sh, "")
                     share = i["share"]
+                    img = user.findwords(collection = "img", Owenr=str(admin), target=str(chat_id))
                     datapost = user.findpost(collection = "posts", Owenr=str(admin), target=str(chat_id), share=str(share))
                     if datapost[1]>0:
                         if datapost[0][0]['post'] != msg:
-                            try:
-                                await client.send_file(int(share), image, caption=msg)
-                            except:
+                            if img[1] == 0 :
+                                try:
+                                    await client.send_file(int(share), image, caption=msg)
+                                except:
+                                    await client.send_message(int(share), msg)
+                            else:
                                 await client.send_message(int(share), msg)
                             try:
                                 bot.send_message(-1001617820230, msg)
@@ -55,9 +59,12 @@ async def handlmsg(event):
                                 pass
                             user.editpost(collection = "posts", Owenr=str(admin), target=str(chat_id), post=str(msg), share=str(share))
                     else:
-                        try:
-                            await client.send_file(int(share), image, caption=msg)
-                        except:
+                        if img[1] == 0 :
+                            try:
+                                await client.send_file(int(share), image, caption=msg)
+                            except:
+                                await client.send_message(int(share), msg)
+                        else:
                             await client.send_message(int(share), msg)
                         try:
                             bot.send_message(-1001617820230, msg)
