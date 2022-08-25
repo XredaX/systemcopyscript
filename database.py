@@ -26,20 +26,27 @@ class user():
         newsession = {"Owenr":Owenr, "Session":Session}
         collection.insert_one(newsession)
 
-    def findpost(collection, Owenr, share):
+    def findpost(collection, Owenr, target, share):
         collection = db[collection]
-        post = {"Owenr":Owenr, "share":share}
+        post = {"Owenr":Owenr, "share":share, "target":target}
         data = collection.find(post)
         countposts = collection.count_documents(post)
         return data, countposts
 
-    def addpost(collection, Owenr, share, post):
+    def addpost(collection, Owenr, share, post, target):
         collection = db[collection]
-        newspost = {"Owenr":Owenr, "share":share, "post":post}
+        newspost = {"Owenr":Owenr, "share":share, "post":post, "target":target}
         collection.insert_one(newspost)
 
-    def editpost(collection, Owenr, share, post):
+    def editpost(collection, Owenr, share, post, target):
         collection = db[collection]
-        post1 = {"Owenr":Owenr, "share":share}
+        post1 = {"Owenr":Owenr, "share":share, "target":target}
         new = {"$set":{"post":post}}
         collection.update_one(post1, new)
+
+    def specifiChannel(collection, Owenr, target):
+        collection = db[collection]
+        channel = {"Owenr":Owenr, "target":target}
+        data = collection.find(channel)
+        countchannels = collection.count_documents(channel)
+        return data, countchannels
