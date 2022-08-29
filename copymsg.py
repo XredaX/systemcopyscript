@@ -56,10 +56,16 @@ async def handlmsg(event):
                             try:
                                 if str(chat_id) == '-1001591094057':
                                    bot.send_message(-1001500845444, msg)
-                                elif str(chat_id) == '-10015910940571':
-                                   bot.send_message(-1001644952320, msg)
-                                elif str(chat_id) == '-1001605585529':
+                                   
+                                if str(chat_id) == '-1001605585529':
                                    bot.send_message(-1001749137545, msg)
+                                   
+                                if str(chat_id) == '-1001491411385':
+                                   bot.send_message(-1001685452565, msg)
+                                   
+                                if str(chat_id) == '-10015910940571':
+                                   bot.send_message(-1001644952320, msg)
+                                   
                                 msg = str(chat_id) + '\n\n' + msg
                                 bot.send_message(-1001617820230, msg)
                             except:
@@ -76,10 +82,15 @@ async def handlmsg(event):
                         try:
                             if str(chat_id) == '-1001591094057':
                                    bot.send_message(-1001500845444, msg)
-                            elif str(chat_id) == '-10015910940571':
-                              bot.send_message(-1001644952320, msg)
-                            elif str(chat_id) == '-1001605585529':
+                                   
+                            if str(chat_id) == '-1001605585529':
                               bot.send_message(-1001749137545, msg)
+                              
+                            if str(chat_id) == '-1001491411385':
+                              bot.send_message(-1001685452565, msg)
+                              
+                            if str(chat_id) == '-10015910940571':
+                              bot.send_message(-1001644952320, msg)
                             msg = str(chat_id) + '\n\n' + msg
                             bot.send_message(-1001617820230, msg)
                         except:
