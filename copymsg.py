@@ -78,7 +78,7 @@ async def handlmsg(event):
                                    bot.send_message(-1001500845444, msg)
                             elif str(chat_id) == '-10015910940571':
                               bot.send_message(-1001644952320, msg)
-                            elif str(chat_id) == '-1001297721242':
+                            elif str(chat_id) == '-1001605585529':
                               bot.send_message(-1001749137545, msg)
                             msg = str(chat_id) + '\n\n' + msg
                             bot.send_message(-1001617820230, msg)
