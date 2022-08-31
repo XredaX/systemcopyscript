@@ -53,23 +53,24 @@ async def handlmsg(event):
                                     await client.send_message(int(share), msg)
                             else:
                                 await client.send_message(int(share), msg)
-                            try:
-                                if str(chat_id) == '-1001591094057':
-                                   bot.send_message(-1001500845444, msg)
-                                   
-                                if str(chat_id) == '-1001605585529':
-                                   bot.send_message(-1001749137545, msg)
-                                   
-                                if str(chat_id) == '-1001491411385':
-                                   bot.send_message(-1001685452565, msg)
-                                   
-                                if str(chat_id) == '-10015910940571':
-                                   bot.send_message(-1001644952320, msg)
-                                   
-                                msg = str(chat_id) + '\n\n' + msg
-                                bot.send_message(-1001617820230, msg)
-                            except:
-                                pass
+                            if str(chat_id) != '-1001165902042' and str(chat_id) != '-1001445907152' and str(chat_id) != '-1001377022329' and str(chat_id) != '-1001213718352':      
+                                 try:
+                                     if str(chat_id) == '-1001591094057':
+                                        bot.send_message(-1001500845444, msg)
+
+                                     if str(chat_id) == '-1001605585529':
+                                        bot.send_message(-1001749137545, msg)
+
+                                     if str(chat_id) == '-1001491411385':
+                                        bot.send_message(-1001685452565, msg)
+
+                                     if str(chat_id) == '-10015910940571':
+                                        bot.send_message(-1001644952320, msg)
+
+                                     msg = str(chat_id) + '\n\n' + msg
+                                     bot.send_message(-1001617820230, msg)
+                                 except:
+                                     pass
                             user.editpost(collection = "posts", Owenr=str(admin), target=str(chat_id), post=str(msg), share=str(share))
                     else:
                         if img[1] == 0 :
@@ -79,22 +80,23 @@ async def handlmsg(event):
                                 await client.send_message(int(share), msg)
                         else:
                             await client.send_message(int(share), msg)
-                        try:
-                            if str(chat_id) == '-1001591094057':
-                                   bot.send_message(-1001500845444, msg)
-                                   
-                            if str(chat_id) == '-1001605585529':
-                              bot.send_message(-1001749137545, msg)
-                              
-                            if str(chat_id) == '-1001491411385':
-                              bot.send_message(-1001685452565, msg)
-                              
-                            if str(chat_id) == '-10015910940571':
-                              bot.send_message(-1001644952320, msg)
-                            msg = str(chat_id) + '\n\n' + msg
-                            bot.send_message(-1001617820230, msg)
-                        except:
-                            pass
+                        if str(chat_id) != '-1001165902042' and str(chat_id) != '-1001445907152' and str(chat_id) != '-1001377022329' and str(chat_id) != '-1001213718352':      
+                             try:
+                                 if str(chat_id) == '-1001591094057':
+                                        bot.send_message(-1001500845444, msg)
+
+                                 if str(chat_id) == '-1001605585529':
+                                   bot.send_message(-1001749137545, msg)
+
+                                 if str(chat_id) == '-1001491411385':
+                                   bot.send_message(-1001685452565, msg)
+
+                                 if str(chat_id) == '-10015910940571':
+                                   bot.send_message(-1001644952320, msg)
+                                 msg = str(chat_id) + '\n\n' + msg
+                                 bot.send_message(-1001617820230, msg)
+                             except:
+                                 pass
                         user.addpost(collection = "posts", Owenr=str(admin), share=str(share), post=str(msg), target=str(chat_id))
         else:
             os.system("python copymsg.py")
