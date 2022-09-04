@@ -67,8 +67,8 @@ async def handlmsg(event):
                                      if str(chat_id) == '-1001733724072':
                                         bot.send_message(-1001244827045, msg)
 
-                                     msg = str(chat_id) + '\n\n' + msg
-                                     bot.send_message(-1001617820230, msg)
+                                     msg1 = str(chat_id) + '\n\n' + msg
+                                     bot.send_message(-1001617820230, msg1)
                                  except:
                                      pass
                             user.editpost(collection = "posts", Owenr=str(admin), target=str(chat_id), post=str(msg), share=str(share))
@@ -93,8 +93,8 @@ async def handlmsg(event):
 
                                  if str(chat_id) == '-1001733724072':
                                    bot.send_message(-1001244827045, msg)
-                                 msg = str(chat_id) + '\n\n' + msg
-                                 bot.send_message(-1001617820230, msg)
+                                 msg1 = str(chat_id) + '\n\n' + msg
+                                 bot.send_message(-1001617820230, msg1)
                              except:
                                  pass
                         user.addpost(collection = "posts", Owenr=str(admin), share=str(share), post=str(msg), target=str(chat_id))
