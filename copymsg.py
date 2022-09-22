@@ -44,13 +44,21 @@ async def handlmsg(event):
                     share = i["share"]
                     img = user.findwords(collection = "img", Owenr=str(admin), target=str(chat_id))
                     datapost = user.findpost(collection = "posts", Owenr=str(admin), target=str(chat_id), share=str(share))
+                    listy = re.findall("\d+\.\d+", str(msg))
+                    cpost = user.findwords(collection = "cpost", Owenr=str(admin), target=str(chat_id))
                     if datapost[1]>0:
                         if datapost[0][0]['post'] != msg:
                             if img[1] == 0 :
-                                try:
-                                    await client.send_file(int(share), image, caption=msg)
-                                except:
-                                    await client.send_message(int(share), msg)
+                                if cpost[1] == 0 :
+                                    try:
+                                        await client.send_file(int(share), image, caption=msg)
+                                    except:
+                                        await client.send_message(int(share), msg)
+                                elif cpost[1] == 1 and len(listy)>3:
+                                    try:
+                                        await client.send_file(int(share), image, caption=msg)
+                                    except:
+                                        await client.send_message(int(share), msg)
                             else:
                                 await client.send_message(int(share), msg)
                             if str(chat_id) != '-1001165902042' and str(chat_id) != '-1001445907152' and str(chat_id) != '-1001377022329' and str(chat_id) != '-1001213718352':      
@@ -74,10 +82,16 @@ async def handlmsg(event):
                             user.editpost(collection = "posts", Owenr=str(admin), target=str(chat_id), post=str(msg), share=str(share))
                     else:
                         if img[1] == 0 :
-                            try:
-                                await client.send_file(int(share), image, caption=msg)
-                            except:
-                                await client.send_message(int(share), msg)
+                            if cpost[1] == 0 :
+                                try:
+                                    await client.send_file(int(share), image, caption=msg)
+                                except:
+                                    await client.send_message(int(share), msg)
+                            elif cpost[1] == 1 and len(listy)>3:
+                                try:
+                                    await client.send_file(int(share), image, caption=msg)
+                                except:
+                                    await client.send_message(int(share), msg)
                         else:
                             await client.send_message(int(share), msg)
                         if str(chat_id) != '-1001165902042' and str(chat_id) != '-1001445907152' and str(chat_id) != '-1001377022329' and str(chat_id) != '-1001213718352':      
